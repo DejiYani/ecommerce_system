@@ -78,7 +78,8 @@ class ProductsTable
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                    ->visible(fn() => auth()->user()?->role === 'Admin'),
                 ]),
             ]);
     }

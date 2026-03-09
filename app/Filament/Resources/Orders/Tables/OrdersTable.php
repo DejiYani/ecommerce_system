@@ -89,11 +89,13 @@ class OrdersTable
                     DeleteAction::make()
                     ->label('Archive')
                     ->visible(fn() => auth()->user()?->role === 'Admin'),
+                    //dagdagan nato ug restore action para ma restore ang archived orders, pero since wala pa ta nag implement ug soft deletes sa Order model, di pa nato ma add karon. Pero in the future, pwede nato ni i add para ma manage nato ang archived orders.
                 ]),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                    ->visible(fn() => auth()->user()?->role === 'Admin'),
                 ]),
             ])
             ->recordUrl(null);
